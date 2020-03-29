@@ -11,13 +11,13 @@ app.use(express.static(path.resolve('./public')));
 
 
 app.get('/', (req, res) => {
-	res.sendfile('public.html', { root: __dirname + "/public/home.html" } );
+	res.sendfile('home.html', { root: __dirname + "/public/home.html" } );
 });
 
 app.get('/calculator', (req, res) => {
-	res.sendfile('public.html', { root: __dirname + "/public/calculator.html" } );
+	res.sendfile('calculator.html', { root: __dirname + "/public/calculator.html" } );
 });
 
 app.get('/safe-medication-mixing.html', (req, res) => {
-	res.sendfile('public.html', { root: __dirname + "/public/medication.html" } );
+	res.sendfile('medication.html', { root: __dirname + "/public/medication.html" } );
 });
