@@ -11,7 +11,7 @@ let auto_update_server = () => {
             process.exit(0)
          }
          else {
-            //console.log('branch is up to date')
+            console.log('branch is up to date')
             setTimeout(auto_update_server, 10000);
          }
          if (error !== null) {
