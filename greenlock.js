@@ -4,20 +4,13 @@ var app = require("./server.js");
 var exec = require('child_process').exec;
 
 let auto_update_server = () => {
-   exec('git status',
+   exec('git pull origin master',
       (error, stdout, stderr) => {
-         if (stdout.includes('Your branch is behind')) {
-            console.log('branch is behind')
-            process.exit(0)
-         }
-         else {
-            console.log('branch is up to date')
-            setTimeout(auto_update_server, 10000);
-         }
          if (error !== null) {
             console.log('exec error: ' + error);
          }
       });
+      setTimeout(auto_update_server, 60000);
 }
 auto_update_server()
 
