@@ -11,5 +11,13 @@ app.use(express.static(path.resolve('./public')));
 
 
 app.get('/', (req, res) => {
-	res.sendfile('public.html', { root: __dirname + "/public/index.html" } );
+	res.sendfile('home.html', { root: __dirname + "/public" } );
+});
+
+app.get('/calculator', (req, res) => {
+	res.sendfile('calculator.html', { root: __dirname + "/public" } );
+});
+
+app.get('/safe-medication-mixing.html', (req, res) => {
+	res.sendfile('medication.html', { root: __dirname + "/public" } );
 });
