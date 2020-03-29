@@ -18,6 +18,7 @@
   "homepage": "https://github.com/Zjjc123/Simple-Nodejs-Server#readme",
   "dependencies": {
     "compression": "^1.7.4",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "greenlock-express": "^4.0.3"
   }
 }

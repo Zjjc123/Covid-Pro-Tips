@@ -1,0 +1,35 @@
+{
+  "defaults": {
+    "store": {
+      "module": "greenlock-store-fs"
+    },
+    "challenges": {
+      "http-01": {
+        "module": "acme-http-01-standalone"
+      }
+    },
+    "renewOffset": "-45d",
+    "renewStagger": "3d",
+    "accountKeyType": "RSA-2048",
+    "serverKeyType": "RSA-2048",
+    "subscriberEmail": "zjjc123@hotmail.com"
+  },
+  "sites": [
+    {
+      "subject": "webcovid-19.live",
+      "altnames": [
+        "webcovid-19.live"
+      ],
+      "renewAt": 1589101124252
+    },
+    {
+      "subject": "www.webcovid-19.live",
+      "altnames": [
+        "www.webcovid-19.live"
+      ],
+      "renewAt": 1589313038559
+    }
+  ]
+}
+
+
