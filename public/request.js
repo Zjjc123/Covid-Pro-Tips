@@ -10,5 +10,5 @@ xmlhttp.open("GET", url, true);
 xmlhttp.send();
 
 function myFunction(json) {
-    document.getElementById("GlobalCase").innerHTML = json[0].GlobalCases;
+    document.getElementById("GlobalCases").innerHTML = json[0].GlobalCases;
 }
