@@ -24,7 +24,7 @@ app.get('/medication.html', (req, res) => {
 	res.sendFile('medication.html', { root: __dirname + "/public" });
 });
 
-
+/*
 const url = "https://covid-193.p.rapidapi.com/countries";
 fetch(url, {
 	method: "GET",
@@ -40,3 +40,4 @@ fetch(url, {
 	.catch(function (error) {
 		console.log(error);
 	});
+*/
