@@ -39,14 +39,16 @@ var usaDeath = 0;
 const url = "https://covid-193.p.rapidapi.com/statistics";
 
 app.get('/data', async (req, res) => {
-	getJSON().then(data => setData(data));
-	res.json(
-		[
-			{GlobalCases : globalCases, GlobalRecovered : globalRecovered, GlobalNew : globalNew, GlobalDeath : globalDeath}, 
-			{USACases : usaCases, USARecovered : usaRecovered, USANew : usaNew, USADeath : usaDeath}, 
-		]
-	);
-	
+	getJSON().then(data => { 
+		setData(data)
+		res.json
+		(
+			[
+				{ GlobalCases: globalCases, GlobalRecovered: globalRecovered, GlobalNew: globalNew, GlobalDeath: globalDeath },
+				{ USACases: usaCases, USARecovered: usaRecovered, USANew: usaNew, USADeath: usaDeath },
+			]
+		);
+	});
 });
 
 async function getJSON() {
@@ -62,8 +64,7 @@ async function getJSON() {
 	return data;
 }
 
-function setData(data)
-{
+function setData(data) {
 	for (countries in data.response) {
 		console.log(data.response[countries]);
 		if (data.response[countries].country == 'All') {
@@ -80,3 +81,4 @@ function setData(data)
 		}
 	}
 }
+
