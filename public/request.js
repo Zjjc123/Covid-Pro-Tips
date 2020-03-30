@@ -17,8 +17,8 @@ function SetText(json) {
     document.getElementById("GlobalNew").innerHTML = json[0].GlobalNew;
     document.getElementById("GlobalDeath").innerHTML = json[0].GlobalDeath;
 
-    document.getElementById("USACases").innerHTML = json[0].USACases;
-    document.getElementById("USARecovered").innerHTML = json[0].USARecovered;
-    document.getElementById("USANew").innerHTML = json[0].USANew;
-    document.getElementById("USADeath").innerHTML = json[0].USADeath;
+    document.getElementById("USACases").innerHTML = json[1].USACases;
+    document.getElementById("USARecovered").innerHTML = json[1].USARecovered;
+    document.getElementById("USANew").innerHTML = json[1].USANew;
+    document.getElementById("USADeath").innerHTML = json[1].USADeath;
 }
