@@ -60,8 +60,7 @@ app.get('/data', async (req, res) => {
 
 app.get('/all', async (req, res) => {
 	getJSON().then(data => { 
-		res.json
-		(data);
+		res.json(data);
 	});
 });
 
