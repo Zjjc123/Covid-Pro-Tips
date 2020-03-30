@@ -49,6 +49,7 @@ app.get('/data', (req, res) => {
 	})
 		.then(resp => resp.json())
 		.then(function (data) {
+			console.log(data);
 			for (countries in data.response) {
 				if (data.response[countries].country == 'All') {
 					globalCases = data.response[countries].cases.total;
