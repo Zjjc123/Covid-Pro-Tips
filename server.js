@@ -14,7 +14,13 @@ app.use(express.static(path.resolve('./public')));
 
 
 app.get('/', (req, res) => {
-	res.sendFile('dashboard.html', { root: __dirname + "/public" });
+	if (req.headers.host.match(/^www/) == null) {
+		res.redirect('http://www.webcovid-19.live', 301);
+	}
+	else {
+		res.sendFile('dashboard.html', { root: __dirname + "/public" });
+	}
+	
 });
 
 app.get('/calculator', (req, res) => {
@@ -37,15 +43,6 @@ var usaNew = 0;
 var usaDeath = 0;
 
 const url = "https://covid-193.p.rapidapi.com/statistics";
-
-app.all(/.*/, function(req, res, next) {
-  var host = req.header("host");
-  if (host.match(/^www\..*/i)) {
-    next();
-  } else {
-    res.redirect(301, "https://www." + host);
-  }
-});
 
 
 app.get('/data', async (req, res) => {
