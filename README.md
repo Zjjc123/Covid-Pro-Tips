@@ -1,7 +1,4 @@
 # Covid-19 Pro-Tips
-
-[![GitHub contributors](https://img.shields.io/github/contributors/zjjc123/Covid-Pro-Tips)](https://https://github.com/Zjjc123/Covid-Pro-Tips/graphs/contributors/)
-
 A website that gives an overview information on the COVID-19 pandemic and more.
 
 
