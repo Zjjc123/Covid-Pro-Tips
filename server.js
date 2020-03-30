@@ -12,15 +12,10 @@ app.use(compression());
 var path = require('path');
 app.use(express.static(path.resolve('./public')));
 
+app.listen(3000, () => console.log('Listening on Port 3000'))
 
 app.get('/', (req, res) => {
-	if (req.headers.host.match(/^www/) == null) {
-		res.redirect('http://www.webcovid-19.live', 301);
-	}
-	else {
-		res.sendFile('dashboard.html', { root: __dirname + "/public" });
-	}
-	
+	res.sendFile('dashboard.html', { root: __dirname + "/public" });
 });
 
 app.get('/calculator', (req, res) => {
@@ -44,9 +39,8 @@ var usaDeath = 0;
 
 const url = "https://covid-193.p.rapidapi.com/statistics";
 
-
 app.get('/data', async (req, res) => {
-	getJSON().then(data => { 
+	getJSON().then(data => {
 		setData(data)
 		res.json
 		(
@@ -59,8 +53,9 @@ app.get('/data', async (req, res) => {
 });
 
 app.get('/all', async (req, res) => {
-	getJSON().then(data => { 
-		res.json(data);
+	getJSON().then(data => {
+		res.json
+		(data);
 	});
 });
 
@@ -94,4 +89,3 @@ function setData(data) {
 		}
 	}
 }
-
