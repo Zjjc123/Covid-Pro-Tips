@@ -38,7 +38,7 @@ var usaDeath = 0;
 
 const url = "https://covid-193.p.rapidapi.com/statistics";
 
-app.get('/data', (req, res) => {
+app.get('/data', async (req, res) => {
 	getJSON().then(data => setData(data));
 	res.json(
 		[
