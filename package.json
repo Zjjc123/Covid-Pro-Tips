@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npm install -g nodemon && sudo npm install forever -g && git pull origin master && npm install && forever start nodemon --exitcrash greenlock.js"
+    "start": "npm install -g nodemon && sudo npm install forever -g && git pull origin master && npm install && forever -c 'nodemon --exitcrash' greenlock.js"
   },
   "repository": {
     "type": "git",
