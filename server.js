@@ -11,7 +11,7 @@ app.use(express.static(path.resolve('./public')));
 
 
 app.get('/', (req, res) => {
-	res.sendFile('home.html', { root: __dirname + "/public" } );
+	res.sendFile('dashboard.html', { root: __dirname + "/public" } );
 });
 
 app.get('/calculator', (req, res) => {
