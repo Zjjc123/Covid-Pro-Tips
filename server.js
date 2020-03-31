@@ -15,7 +15,8 @@ app.use(express.static(path.resolve('./public')));
 app.listen(3000, () => console.log('Listening on Port 3000'))
 
 app.get('/', (req, res) => {
-	res.sendFile('dashboard.html', { root: __dirname + "/public" });
+		res.sendFile('dashboard.html', { root: __dirname + "/public" });
+
 });
 
 app.get('/calculator', (req, res) => {
@@ -39,6 +40,13 @@ var usaDeath = 0;
 
 const url = "https://covid-193.p.rapidapi.com/statistics";
 
+app.use((req, res, next) => {
+	res.append('Access-Control-Allow-Origin', ['*']);
+	res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+	res.append('Access-Control-Allow-Headers', 'Content-Type');
+	next();
+});
+
 app.get('/data', async (req, res) => {
 	getJSON().then(data => {
 		setData(data)
@@ -54,8 +62,7 @@ app.get('/data', async (req, res) => {
 
 app.get('/all', async (req, res) => {
 	getJSON().then(data => {
-		res.json
-		(data);
+		res.json(data.response);
 	});
 });
 
@@ -89,3 +96,4 @@ function setData(data) {
 		}
 	}
 }
+
