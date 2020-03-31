@@ -61,7 +61,11 @@ app.get('/data', async (req, res) => {
 });
 
 app.get('/all', async (req, res) => {
+<<<<<<< HEAD
 	getJSON().then(data => {
+=======
+	getJSON().then(data => { 
+>>>>>>> map_visual
 		res.json(data.response);
 	});
 });
