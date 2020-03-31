@@ -3376,10 +3376,23 @@ function SetMap(json) {
   }
 
   var dataSet = [];
+    
   for (i = 0; i < json.length; i++) {
     dataSet.push({
       'id': nameCountries[json[i].country],
-      'size': json[i].cases.total
+      'size': json[i].cases.total,
+      normal:   {
+                 fill: "#b30059 " + (0.5 * (json[i].cases.total) / (200000) + 0.1),
+                 stroke: "#b30059"
+                },
+      hovered:  {
+                 fill: "#b30059 0.05",
+                 stroke: "2 #b30059"
+                },
+      selected: {
+                 fill: "#b30059 0.6",
+                 stroke: "4 #b30059"
+                }
     });
   }
 
@@ -3390,14 +3403,31 @@ function SetMap(json) {
   // set the series
   var series = map.bubble(dataSet);
   // set the maximum size of the bubble
-  map.maxBubbleSize('100%');
+  map.maxBubbleSize('60%');
   // set the minimum size of the bubble
   map.minBubbleSize('1%');
 
   // disable labels
   series.labels(false);
+    
+    series.tooltip().format(function(e){
+    return "Cases: " + e.getData("size")
+  });
+    
+  map.colorRange(false);
+    
+  // Disables zoom On Mouse Wheel
+map.interactivity().zoomOnMouseWheel(true);
+// Disables zoom on double click
+map.interactivity().keyboardZoomAndMove(true);
+// Disables zoom on double click
+map.interactivity().zoomOnDoubleClick(true);
 
-  // set the container
+//   var zoomController = anychart.ui.zoom();
+// zoomController.target(map);
+// zoomController.render();
+    
+    // set the container
   map.container('map-container');
   map.draw();
-};
+}
