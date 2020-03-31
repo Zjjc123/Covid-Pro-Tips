@@ -27,10 +27,13 @@ app.get('/calculator', (req, res) => {
 	res.sendFile('calculator.html', { root: __dirname + "/public" });
 });
 
-app.get('/medication.html', (req, res) => {
+app.get('/medication', (req, res) => {
 	res.sendFile('medication.html', { root: __dirname + "/public" });
 });
 
+app.get('/map', (req, res) => {
+	res.sendFile('map.html', { root: __dirname + "/public" });
+});
 
 var globalCases = 0;
 var globalRecovered = 0;
