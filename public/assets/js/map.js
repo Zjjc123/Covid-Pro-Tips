@@ -251,7 +251,7 @@ function SetMap(json) {
     'Uzbekistan': 'UZ',
     'Vanuatu': 'VU',
     'Venezuela': 'VE',
-    'Vietnam': 'VN',
+    'Vietam': 'VN',
     'Virgin Islands, British': 'VG',
     'Virgin Islands, U.S.': 'VI',
     'Wallis And Futuna': 'WF',
@@ -756,7 +756,7 @@ function SetMap(json) {
 
   for (i = 0; i < json.length; i++) {
     dataSet.push({
-      'id': nameCountries[json[i].country],
+      'id': json[i].country,
       'size': json[i].cases.total,
       "lat": lat[nameCountries[json[i].country]],
       "long": long[nameCountries[json[i].country]],
@@ -805,6 +805,9 @@ function SetMap(json) {
   //   var zoomController = anychart.ui.zoom();
   // zoomController.target(map);
   // zoomController.render();
+    
+    var tooltip = series.tooltip();
+    tooltip.titleFormat("{%id}")
 
   // set the container
   map.container('map-container');
