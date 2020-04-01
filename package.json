@@ -1,5 +1,5 @@
 {
-  "name": "simple-nodejs-server",
+  "name": "covid-pro-tips",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -11,7 +11,7 @@
     "type": "git",
     "url": "git+https://github.com/Zjjc123/Covid-Pro-Tips.git"
   },
-  "author": "",
+  "author": "Jason Zhang",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Zjjc123/Covid-Pro-Tips/issues"
