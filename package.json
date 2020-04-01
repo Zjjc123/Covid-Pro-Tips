@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Zjjc123/Simple-Nodejs-Server.git"
+    "url": "git+https://github.com/Zjjc123/Covid-Pro-Tips.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Zjjc123/Simple-Nodejs-Server/issues"
+    "url": "https://github.com/Zjjc123/Covid-Pro-Tips/issues"
   },
-  "homepage": "https://github.com/Zjjc123/Simple-Nodejs-Server#readme",
+  "homepage": "https://github.com/Zjjc123/Covid-Pro-Tips#readme",
   "dependencies": {
     "compression": "^1.7.4",
     "dotenv": "^8.2.0",
