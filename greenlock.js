@@ -3,6 +3,17 @@
 var app = require("./server.js");
 var exec = require('child_process').exec;
 
+let auto_update_server = () => {
+    exec('git pull origin master',
+       (error, stdout, stderr) => {
+          if (error !== null) {
+             console.log('exec error: ' + error);
+          }
+       });
+       setTimeout(auto_update_server, 60000);
+ }
+ auto_update_server()
+
 var greenlock = require("greenlock-express")
     .init({
         packageRoot: __dirname,
