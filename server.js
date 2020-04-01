@@ -88,7 +88,6 @@ async function getJSON() {
 
 function setData(data) {
 	for (countries in data.response) {
-		console.log(data.response[countries]);
 		if (data.response[countries].country == 'All') {
 			globalCases = data.response[countries].cases.total;
 			globalRecovered = data.response[countries].cases.recovered;
