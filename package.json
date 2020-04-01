@@ -1,7 +1,7 @@
 {
   "name": "covid-pro-tips",
   "version": "1.0.0",
-  "description": "",
+  "description": "Covid-19 Pandemic Informational Website",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
