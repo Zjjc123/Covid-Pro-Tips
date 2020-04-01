@@ -800,14 +800,25 @@ function SetMap(json) {
   // Disables zoom on double click
   map.interactivity().keyboardZoomAndMove(true);
   // Disables zoom on double click
-  map.interactivity().zoomOnDoubleClick(true);
+  map.interactivity().zoomOnDoubleClick(false);
 
-  //   var zoomController = anychart.ui.zoom();
-  // zoomController.target(map);
-  // zoomController.render();
-    
-    var tooltip = series.tooltip();
-    tooltip.titleFormat("{%id}")
+  var zoomController = anychart.ui.zoom();
+  zoomController.target(map);
+  zoomController.render();
+
+  // set zoom
+  var clicked = true;
+  map.listen('dblclick', function(evt) {
+    if (clicked) {
+      map.zoomTo(3, evt.clientX, evt.clientY);
+    } else {
+      map.zoomTo(0, evt.clientX, evt.clientY);
+    }
+    clicked = !clicked;
+  });
+
+  var tooltip = series.tooltip();
+  tooltip.titleFormat("{%id}")
 
   // set the container
   map.container('map-container');
