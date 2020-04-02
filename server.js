@@ -35,6 +35,10 @@ app.get('/map', (req, res) => {
 	res.sendFile('map.html', { root: __dirname + "/public" });
 });
 
+app.get('*', function(req, res){
+	res.status(404).sendFile('404.html', { root: __dirname + "/public" });
+  });
+  
 var globalCases = 0;
 var globalRecovered = 0;
 var globalNew = 0;
