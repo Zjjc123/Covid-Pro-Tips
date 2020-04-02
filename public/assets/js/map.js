@@ -825,7 +825,7 @@ function SetMap(json) {
 
   // set zoom
   map.listen('dblclick', function(evt) {
-    map.zoomTo(1.5, evt.clientX, evt.clientY);
+    map.zoom(1.5, evt.clientX, evt.clientY);
   });
 
   var scrollableElement = document.body;
