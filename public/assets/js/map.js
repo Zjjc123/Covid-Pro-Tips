@@ -805,6 +805,9 @@ function SetMap(json) {
   // disable labels
   series.labels(false);
 
+  // disable selection
+  series.selectionMode(false);
+  
   series.tooltip().format(function(e) {
     return "Cases: " + e.getData("size") + " (" + e.getData("new") + ")\n" +
       "Deaths: " + e.getData("deaths") + " (" + e.getData("newdeaths") + ")"
