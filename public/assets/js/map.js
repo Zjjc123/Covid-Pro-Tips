@@ -755,13 +755,29 @@ function SetMap(json) {
   var dataSet = [];
 
   for (i = 0; i < json.length; i++) {
+    var stats = [];
+    stats[0] = json[i].country;
+    stats[1] = json[i].cases.total;
+    stats[2] = json[i].cases.new;
+    stats[3] = json[i].deaths.total;
+    stats[4] = json[i].deaths.new;
+
+    for (n = 0; n < stats.length; n++) {
+      if (stats[n] == null) {
+        stats[n] = 0;
+      }
+    }
+
     dataSet.push({
-      'id': json[i].country,
-      'size': json[i].cases.total,
+      'id': stats[0],
+      'size': stats[1],
+      'new': stats[2],
+      'deaths': stats[3],
+      'newdeaths': stats[4],
       "lat": lat[nameCountries[json[i].country]],
       "long": long[nameCountries[json[i].country]],
       normal: {
-        fill: "#b30059 " + (0.5 * (json[i].cases.total) / (200000) + 0.1),
+        fill: "#b30059 " + (0.5 * (json[i].cases.total) / (250000) + 0.1),
         stroke: "#b30059"
       },
       hovered: {
@@ -790,7 +806,8 @@ function SetMap(json) {
   series.labels(false);
 
   series.tooltip().format(function(e) {
-    return "Cases: " + e.getData("size")
+    return "Cases: " + e.getData("size") + " (" + e.getData("new") + ")\n" +
+      "Deaths: " + e.getData("deaths") + " (" + e.getData("newdeaths") + ")"
   });
 
   map.colorRange(false);
