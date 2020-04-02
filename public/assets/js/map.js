@@ -813,7 +813,7 @@ function SetMap(json) {
   map.colorRange(false);
 
   // Disables zoom On Mouse Wheel
-  map.interactivity().zoomOnMouseWheel(true);
+  map.interactivity().zoomOnMouseWheel(false);
   // Disables zoom on double click
   map.interactivity().keyboardZoomAndMove(true);
   // Disables zoom on double click
@@ -833,6 +833,25 @@ function SetMap(json) {
     }
     clicked = !clicked;
   });
+
+  var scrollableElement = document.body;
+
+  scrollableElement.addEventListener('wheel', checkScrollDirection);
+
+  function checkScrollDirection(evt) {
+    if (checkScrollDirectionIsUp(evt)) {
+      map.zoomTo(2, evt.clientX, evt.clientY)
+    } else {
+      map.zoomTo(0, evt.clientX, evt.clientY)
+    }
+  }
+
+  function checkScrollDirectionIsUp(event) {
+    if (event.wheelDelta) {
+      return event.wheelDelta > 0;
+    }
+    return event.deltaY < 0;
+  }
 
   var tooltip = series.tooltip();
   tooltip.titleFormat("{%id}")
