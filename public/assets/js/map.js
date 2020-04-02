@@ -840,9 +840,9 @@ function SetMap(json) {
 
   function checkScrollDirection(evt) {
     if (checkScrollDirectionIsUp(evt)) {
-      map.zoomTo(2, evt.clientX, evt.clientY)
+      map.zoom(1.5, evt.clientX, evt.clientY)
     } else {
-      map.zoomTo(0, evt.clientX, evt.clientY)
+      map.zoom(0.5, evt.clientX, evt.clientY)
     }
   }
 
