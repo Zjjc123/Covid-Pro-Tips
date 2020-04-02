@@ -35,40 +35,12 @@ app.get('/map', (req, res) => {
 	res.sendFile('map.html', { root: __dirname + "/public" });
 });
 
-
-var globalCases = 0;
-var globalRecovered = 0;
-var globalNew = 0;
-var globalDeath = 0;
-
-var usaCases = 0;
-var usaRecovered = 0;
-var usaNew = 0;
-var usaDeath = 0;
-
-const url = "https://covid-193.p.rapidapi.com/statistics";
-
 app.use((req, res, next) => {
     res.append('Access-Control-Allow-Origin', ['*']);
     res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
     res.append('Access-Control-Allow-Headers', 'Content-Type');
     next();
 });
-
-
-var errorHandler = require('express-error-handler'),
-  handler = errorHandler({
-    static: {
-      '404': 'public/404.html'
-    }
-  });
-
-// After all your routes...
-// Pass a 404 into next(err)
-app.use( errorHandler.httpError(404) );
-
-// Handle all unhandled errors:
-app.use( handler );
 
 
 app.get('/data', async (req, res) => {
@@ -89,6 +61,32 @@ app.get('/all', async (req, res) => {
 		res.json(data.response);
 	});
 });
+
+var errorHandler = require('express-error-handler'),
+  handler = errorHandler({
+    static: {
+      '404': 'public/404.html'
+    }
+  });
+
+// After all your routes...
+// Pass a 404 into next(err)
+app.use( errorHandler.httpError(404) );
+
+// Handle all unhandled errors:
+app.use( handler );
+
+var globalCases = 0;
+var globalRecovered = 0;
+var globalNew = 0;
+var globalDeath = 0;
+
+var usaCases = 0;
+var usaRecovered = 0;
+var usaNew = 0;
+var usaDeath = 0;
+
+const url = "https://covid-193.p.rapidapi.com/statistics";
 
 async function getJSON() {
 	let response = await fetch(url, {
