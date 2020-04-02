@@ -824,14 +824,8 @@ function SetMap(json) {
   zoomController.render();
 
   // set zoom
-  var clicked = true;
   map.listen('dblclick', function(evt) {
-    if (clicked) {
-      map.zoomTo(3, evt.clientX, evt.clientY);
-    } else {
-      map.zoomTo(0, evt.clientX, evt.clientY);
-    }
-    clicked = !clicked;
+    map.zoomTo(1.5, evt.clientX, evt.clientY);
   });
 
   var scrollableElement = document.body;
