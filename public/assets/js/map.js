@@ -805,6 +805,9 @@ function SetMap(json) {
   // disable labels
   series.labels(false);
 
+  // disable selection
+  series.selectionMode(false);
+  
   series.tooltip().format(function(e) {
     return "Cases: " + e.getData("size") + " (" + e.getData("new") + ")\n" +
       "Deaths: " + e.getData("deaths") + " (" + e.getData("newdeaths") + ")"
@@ -824,14 +827,8 @@ function SetMap(json) {
   zoomController.render();
 
   // set zoom
-  var clicked = true;
   map.listen('dblclick', function(evt) {
-    if (clicked) {
-      map.zoomTo(3, evt.clientX, evt.clientY);
-    } else {
-      map.zoomTo(0, evt.clientX, evt.clientY);
-    }
-    clicked = !clicked;
+    map.zoom(2, evt.clientX, evt.clientY);
   });
 
   var scrollableElement = document.body;
