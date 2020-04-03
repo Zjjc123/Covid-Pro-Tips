@@ -777,16 +777,16 @@ function SetMap(json) {
       "lat": lat[nameCountries[json[i].country]],
       "long": long[nameCountries[json[i].country]],
       normal: {
-        fill: "#b30059 " + (0.5 * (json[i].cases.total) / (250000) + 0.1),
-        stroke: "#b30059"
+        fill: "#62d9d9 " + (0.5 * (json[i].cases.total) / (250000) + 0.1),
+        stroke: "#62d9d9"
       },
       hovered: {
-        fill: "#b30059 0.05",
-        stroke: "2 #b30059"
+        fill: "#62d9d9 0.05",
+        stroke: "2 #62d9d9"
       },
       selected: {
-        fill: "#b30059 0.6",
-        stroke: "4 #b30059"
+        fill: "#62d9d9 0.6",
+        stroke: "4 #62d9d9"
       }
     });
   }
