@@ -39,31 +39,52 @@
                         <h3 class="text-dark mb-0" style="margin-top: 50px;margin-bottom: 50px;">Resource Calculator</h3>
                     </div>
                 </div>
-                <form id="frm1" action="/action_page.php"> 
+                <form id="frm1" action="/action_page.php">
 
                     <p style="text-indent: 30px">
                     Number of people in household: <input type="number" id="people">	<br>
                     </p>
                     <p style="text-indent: 30px;">
                     Number of weeks you are quarantined for: <input type="number" 		id="weeks"><br><br>
-                    </p>                
+                    </p>
                     <p style="text-indent: 30px;">
                     <input type="button" onclick="myFunction()" value="Submit">
                     </p>
                 </form>
-                                  
+
                 <script>
-                function myFunction() 
+                function myFunction()
                 {
                   var x = document.getElementById("frm1");
                   var p = document.getElementById("people").value;
                   var w = document.getElementById("weeks").value;
-                  alert("\n\nYou will need " + p*w + " rolls of toilet paper. \n\nYou will also need " + p*w*1/4 + " bars of soap. \n\nYou will also need " + 770*p*w + " grams of protein. \n\nYou will also need " + p*w*2030 + " grams of carbohydrates. \n\nYou will additionally need " + p*w*210 + " grams of fiber. \n\nYou will additionally need " + p*w*560 + " grams of sugar. \n\nYou will additionally need " + p*w*525 + " grams of fat.");
- 
+
+
+
+                  document.getElementById("hello").innerHTML = "You need " + p*w + " rolls of toilet paper."
+                  document.getElementById("hey").innerHTML = "You need " + p*w*1/4 + " bars of soap."
+                  document.getElementById("hi").innerHTML = "You need " + p*w*770 + " grams of protein."
+                  document.getElementById("heyo").innerHTML = "You need " + p*w*2030 + " grams of carbohydrates."
+                  document.getElementById("hola").innerHTML = "You need " + p*w*210 + " grams of fiber."
+                  document.getElementById("yolo").innerHTML = "You need " + p*w*560 + " grams of sugar."
+                  document.getElementById("bonjour").innerHTML = "You need " + p*w*525 + " grams of fat."
+
+
                 }
-                </script>             
-                
-                
+                </script>
+
+                <p id = "hello" style="text-indent: 30px;"></p>
+                <p id = "hey" style="text-indent: 30px;"></p>
+                <p id = "hi" style="text-indent: 30px;"></p>
+                <p id = "heyo" style="text-indent: 30px;"></p>
+                <p id = "hola" style="text-indent: 30px;"></p>
+                <p id = "yolo" style="text-indent: 30px;"></p>
+                <p id = "bonjour" style="text-indent: 30px;"></p>
+
+
+
+
+
             </div>
         </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a></div>
     <div class="card shadow"></div>
