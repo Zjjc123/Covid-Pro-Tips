@@ -89,7 +89,9 @@
     {
         $(document).ready(function() {
             $.noConflict();
-            var table = $('#table').DataTable();
+            var table = $('#table').DataTable({
+                "order": [ 1, 'desc' ]
+            });
 
             for (i = 0; i < parsed.length; i++){
                 table.row.add([parsed[i].country, parsed[i].cases.total, parsed[i].cases.active, parsed[i].cases.critical, parsed[i].cases.new, parsed[i].deaths.total]);
