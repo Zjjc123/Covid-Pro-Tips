@@ -758,16 +758,13 @@ function SetMap(json) {
   /* SET COLOR RANGE */
   var newCases = [];
   for (i = 0; i < json.length; i++) {
-    if (json[i].cases.new == null)
+    if (json[i].cases.new == null || json[i].country == "All")
       newCases[i] = 0;
     else
       newCases[i] = json[i].cases.new.substring(1);
   }
 
   var normalizedNew = normalize(newCases);
-  for (i = 0; i < json.length; i++) {
-    console.log(normalizedNew[i]);
-  }
 
   for (i = 0; i < json.length; i++) {
     var stats = [];
