@@ -1,0 +1,2 @@
+git lfs lock bootstrap_studio_designs/website.bsdesign
+pause
