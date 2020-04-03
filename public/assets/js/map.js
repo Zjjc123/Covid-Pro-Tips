@@ -794,16 +794,16 @@ function SetMap(json) {
       "lat": lat[nameCountries[json[i].country]],
       "long": long[nameCountries[json[i].country]],
       normal: {
-        fill: getGradientColor("#00FF00", "FF0000", normalizedNew[i]) + " " + (0.5 * (json[i].cases.total) / (250000) + 0.1),
-        stroke: getGradientColor("#00FF00", "FF0000", normalizedNew[i])
+        fill: getGradientColor("#00ffe2", "090b79", normalizedNew[i]) + " " + (0.5 * (json[i].cases.total) / (250000) + 0.1),
+        stroke: getGradientColor("#00ffe2", "090b79", normalizedNew[i])
       },
       hovered: {
-        fill: getGradientColor("#00FF00", "FF0000", normalizedNew[i]) +" 0.05",
-        stroke: "2 " + getGradientColor("#00FF00", "FF0000", normalizedNew[i])
+        fill: getGradientColor("#00ffe2", "090b79", normalizedNew[i]) +" 0.05",
+        stroke: "2 " + getGradientColor("#00ffe2", "090b79", normalizedNew[i])
       },
       selected: {
-        fill: getGradientColor("#00FF00", "FF0000", normalizedNew[i]) + " 0.6",
-        stroke: "4 " + getGradientColor("#00FF00", "FF0000", normalizedNew[i])
+        fill: getGradientColor("#00ffe2", "090b79", normalizedNew[i]) + " 0.6",
+        stroke: "4 " + getGradientColor("#00ffe2", "090b79", normalizedNew[i])
       }
     });
   }
@@ -837,7 +837,7 @@ function SetMap(json) {
   // Disables zoom on double click
   map.interactivity().zoomOnDoubleClick(false);
     
-  map.background().fill("#F8F9FC");
+  map.background().fill("#d6d6d6");
     
   var cr = map.colorRange(false);
 
