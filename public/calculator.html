@@ -33,23 +33,26 @@
             </div>
         </nav>
         <div class="d-flex flex-column" id="content-wrapper">
-            <div id="content" style="background-color: #def7f7;">
+            <div id="content">
                 <div class="container">
                     <div class="d-sm-flex justify-content-between align-items-center mb-4">
                         <h3 class="text-dark mb-0" style="margin-top: 50px;margin-bottom: 50px;">Resource Calculator</h3>
                     </div>
-                </div><form id="frm1" action="/action_page.php">
-
+                </div>             
+<form id="frm1" class= "form-inline" action="/action_page.php">
+                    <div class = "container-fluid">
                     <p style="text-indent: 30px">
-                    Number of people in household: <input type="number" id="people">	<br>
+                    Number of people in household: <input class="form-control" type="number" id="people">
                     </p>
                     <p style="text-indent: 30px;">
-                    Number of weeks you are quarantined for: <input type="number" 		id="weeks"><br><br>
+                    Number of weeks you are quarantined for: <input class="form-control" type="number" id="weeks">
                     </p>
                     <p style="text-indent: 30px;">
-                    <input type="button" onclick="myFunction()" value="Submit">
+                        <input type="button" class="btn btn-primary" type="submit" onclick="myFunction()" value="Submit">
                     </p>
+                    </div>
                 </form>
+
 
                 <script>
                 function myFunction()
@@ -82,9 +85,7 @@
 
 
 
-
-
-            </div></div>
+</div>
         </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a></div>
     <div class="card shadow"></div>
     <script src="assets/js/jquery.min.js"></script>
