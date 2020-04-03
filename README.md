@@ -16,6 +16,20 @@ sudo npm start
 ## Screenshots
 ![](https://i.imgur.com/K47ydRJ.png)
 
+## Edit Design File (mutex) - Binary File
+
+Start Editing
+```
+git lfs lock bootstrap_studio_designs/website.bsdesign
+```
+or run "start_editing.bat"
+
+Stop Editing
+```
+git lfs unlock bootstrap_studio_designs/website.bsdesign
+```
+or run "stop_editing.bat"
+
 ## API
 https://api-sports.io/documentation/covid-19
 
