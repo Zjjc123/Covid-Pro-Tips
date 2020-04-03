@@ -16,7 +16,7 @@ function SetTable(parsed)
     txt += "<table border='1'>"
     for (i = 0; i < parsed.length; i++){
         console.log(parsed[i].cases)
-      txt += "<tr><td>" + parsed[i].country + "</td><td>" + parsed[i].cases.total + "</td><td>" + parsed[i].cases.active + "</td><td>" + parsed[i].cases.critical + "</td><td>"  + parsed[i].cases.new + "</td><td>" + parsed[i].death.total + "</td></tr>";
+      txt += "<tr><td>" + parsed[i].country + "</td><td>" + parsed[i].cases.total + "</td><td>" + parsed[i].cases.active + "</td><td>" + parsed[i].cases.critical + "</td><td>"  + parsed[i].cases.new + "</td><td>" + parsed[i].deaths.total + "</td></tr>";
     }
     txt += "</table>"
     document.getElementById("tableBody").innerHTML = txt;
