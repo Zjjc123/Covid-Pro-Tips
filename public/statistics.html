@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Table - COVID Pro-Tips</title>
+    <title>Statistics - COVID Pro-Tips</title>
     <meta property="og:image" content="assets/img/favicon.png">
     <meta name="twitter:image" content="assets/img/favicon.png">
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
@@ -103,6 +103,12 @@
                 parsed[i].cases.active = parsed[i].cases.active.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                 parsed[i].cases.critical = parsed[i].cases.critical.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                 parsed[i].deaths.total = parsed[i].deaths.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                
+                if (parsed[i].cases.new == null) {
+                    parsed[i].cases.new = 0;
+                } else {
+                    parsed[i].cases.new = "+" + parsed[i].cases.new.substring(1).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                }
                                 
                 table.row.add([parsed[i].country, parsed[i].cases.total, parsed[i].cases.active, parsed[i].cases.critical, parsed[i].cases.new, parsed[i].deaths.total]);
             }
