@@ -35,7 +35,7 @@ app.get('/map', (req, res) => {
 	res.sendFile('map.html', { root: __dirname + "/public" });
 });
 
-app.get('/table', (req, res) => {
+app.get('/statistics', (req, res) => {
 	res.sendFile('table.html', { root: __dirname + "/public" });
 });
 

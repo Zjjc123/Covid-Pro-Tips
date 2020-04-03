@@ -36,7 +36,7 @@
                     <li class="nav-item" role="presentation"><a class="nav-link" href="calculator.html"><i class="fas fa-calculator"></i><span>Resource Calculator</span></a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="medication.html"><i class="fas fa-briefcase-medical"></i><span>Medication Analyzer</span></a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="map.html"><i class="fas fa-map-marker-alt"></i><span>Map</span></a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link active" href="table.html"><i class="fas fa-chart-line"></i><span>Statistics</span></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link active" href="statistics.html"><i class="fas fa-chart-line"></i><span>Statistics</span></a></li>
                 </ul>
                 <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
             </div>
@@ -90,10 +90,20 @@
         $(document).ready(function() {
             $.noConflict();
             var table = $('#table').DataTable({
-                "order": [ 1, 'desc' ]
+                "order": [ 1, 'desc' ],
+                "language": {
+                    "decimal": ".",
+                    "thousands": ","
+                }
             });
 
             for (i = 0; i < parsed.length; i++){
+                
+                parsed[i].cases.total = parsed[i].cases.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                parsed[i].cases.active = parsed[i].cases.active.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                parsed[i].cases.critical = parsed[i].cases.critical.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                parsed[i].deaths.total = parsed[i].deaths.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                                
                 table.row.add([parsed[i].country, parsed[i].cases.total, parsed[i].cases.active, parsed[i].cases.critical, parsed[i].cases.new, parsed[i].deaths.total]);
             }
 
