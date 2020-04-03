@@ -754,6 +754,21 @@ function SetMap(json) {
 
   var dataSet = [];
 
+
+  /* SET COLOR RANGE */
+  var newCases = [];
+  for (i = 0; i < json.length; i++) {
+    if (json[i].cases.new == null)
+      newCases[i] = 0;
+    else
+      newCases[i] = json[i].cases.new.substring(1);
+  }
+
+  var normalizedNew = normalize(newCases);
+  for (i = 0; i < json.length; i++) {
+    console.log(normalizedNew[i]);
+  }
+
   for (i = 0; i < json.length; i++) {
     var stats = [];
     stats[0] = json[i].country;
@@ -768,6 +783,8 @@ function SetMap(json) {
       }
     }
 
+
+
     dataSet.push({
       'id': stats[0],
       'size': stats[1],
@@ -777,16 +794,16 @@ function SetMap(json) {
       "lat": lat[nameCountries[json[i].country]],
       "long": long[nameCountries[json[i].country]],
       normal: {
-        fill: "#62d9d9 " + (0.5 * (json[i].cases.total) / (250000) + 0.1),
-        stroke: "#62d9d9"
+        fill: getGradientColor("#00FF00", "FF0000", normalizedNew[i]) + " " + (0.5 * (json[i].cases.total) / (250000) + 0.1),
+        stroke: getGradientColor("#00FF00", "FF0000", normalizedNew[i])
       },
       hovered: {
-        fill: "#62d9d9 0.05",
-        stroke: "2 #62d9d9"
+        fill: getGradientColor("#00FF00", "FF0000", normalizedNew[i]) +" 0.05",
+        stroke: "2 " + getGradientColor("#00FF00", "FF0000", normalizedNew[i])
       },
       selected: {
-        fill: "#62d9d9 0.6",
-        stroke: "4 #62d9d9"
+        fill: getGradientColor("#00FF00", "FF0000", normalizedNew[i]) + " 0.6",
+        stroke: "4 " + getGradientColor("#00FF00", "FF0000", normalizedNew[i])
       }
     });
   }
@@ -813,14 +830,16 @@ function SetMap(json) {
       "Deaths: " + e.getData("deaths") + " (" + e.getData("newdeaths") + ")"
   });
 
-  map.colorRange(false);
-
   // Disables zoom On Mouse Wheel
   map.interactivity().zoomOnMouseWheel(false);
   // Disables zoom on double click
   map.interactivity().keyboardZoomAndMove(true);
   // Disables zoom on double click
   map.interactivity().zoomOnDoubleClick(false);
+    
+  map.background().fill("#F8F9FC");
+    
+  var cr = map.colorRange(false);
 
   var zoomController = anychart.ui.zoom();
   zoomController.target(map);
@@ -856,4 +875,59 @@ function SetMap(json) {
   // set the container
   map.container('map-container');
   map.draw();
+}
+
+getGradientColor = function(start_color, end_color, percent) {
+  // strip the leading # if it's there
+  start_color = start_color.replace(/^\s*#|\s*$/g, '');
+  end_color = end_color.replace(/^\s*#|\s*$/g, '');
+
+  // convert 3 char codes --> 6, e.g. `E0F` --> `EE00FF`
+  if(start_color.length == 3){
+    start_color = start_color.replace(/(.)/g, '$1$1');
+  }
+
+  if(end_color.length == 3){
+    end_color = end_color.replace(/(.)/g, '$1$1');
+  }
+
+  // get colors
+  var start_red = parseInt(start_color.substr(0, 2), 16),
+      start_green = parseInt(start_color.substr(2, 2), 16),
+      start_blue = parseInt(start_color.substr(4, 2), 16);
+
+  var end_red = parseInt(end_color.substr(0, 2), 16),
+      end_green = parseInt(end_color.substr(2, 2), 16),
+      end_blue = parseInt(end_color.substr(4, 2), 16);
+
+  // calculate new color
+  var diff_red = end_red - start_red;
+  var diff_green = end_green - start_green;
+  var diff_blue = end_blue - start_blue;
+
+  diff_red = ( (diff_red * percent) + start_red ).toString(16).split('.')[0];
+  diff_green = ( (diff_green * percent) + start_green ).toString(16).split('.')[0];
+  diff_blue = ( (diff_blue * percent) + start_blue ).toString(16).split('.')[0];
+
+  // ensure 2 digits by color
+  if( diff_red.length == 1 ) diff_red = '0' + diff_red
+  if( diff_green.length == 1 ) diff_green = '0' + diff_green
+  if( diff_blue.length == 1 ) diff_blue = '0' + diff_blue
+
+  return '#' + diff_red + diff_green + diff_blue;
+};
+
+function normalize(arr)
+{
+  var max = Math.max.apply(Math, arr);
+  var min = Math.min.apply(Math, arr);
+  console.log(min + " " + max);
+  var ret = [];
+
+  for (var i = 0; i < arr.length; i++)
+  {
+    ret.push((arr[i] - min) / (max - min));
+  }
+
+  return ret;
 }
