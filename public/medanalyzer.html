@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Map - COVID Pro-Tips</title>
+    <meta property="og:image" content="assets/img/favicon.png">
+    <meta name="twitter:image" content="assets/img/favicon.png">
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+    <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="assets/css/Team-Clean.css">
+<link rel="icon" href="assets/img/favicon.png">
+</head>
+
+<body id="page-top">
+    <div id="wrapper">
+        <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0" style="background-color: #bbeaff;background-image: url(&quot;assets/img/corona%20time.jpg&quot;);">
+            <div class="container-fluid d-flex flex-column p-0">
+                <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+                    <div class="sidebar-brand-icon rotate-n-15"></div>
+                    <div class="sidebar-brand-text mx-3"><span>COVID PRO-TIPS</span></div>
+                </a>
+                <hr class="sidebar-divider my-0">
+                <ul class="nav navbar-nav text-light" id="accordionSidebar">
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="dashboard.html"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="calculator.html"><i class="fas fa-calculator"></i><span>Resource Calculator</span></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="medication.html"><i class="fas fa-briefcase-medical"></i><span>Medication Analyzer</span></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="map.html"><i class="fas fa-map-marker-alt"></i><span>Map</span></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="statistics.html"><i class="fas fa-chart-line"></i><span>Statistics</span></a><a class="nav-link active" href="medanalyzer.html"><i class="fas fa-briefcase-medical"></i>Medication Analyzer<br>&nbsp; &nbsp; &nbsp;(using API)</a></li>
+                </ul>
+                <div class="text-center d-none d-md-inline"></div><a href="medication.html"></a><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
+        </nav>
+        <div class="d-flex flex-column" id="content-wrapper">
+            <h3 class="text-dark mb-4" style="padding-top: 0px;margin-top: 50px;margin-bottom: 50px;">&nbsp; &nbsp; &nbsp; &nbsp;Medication Analyzer</h3><p style="text-indent: 52px; font-size: 20px;">
+    Please enter the medicine you are taking, to ensure that they are safe to consume together.  </p>
+
+    <form id="frm1" class= "form-inline" action="/action_page.php">
+        <div class = "container-fluid">
+        <p style="text-indent: 30px">
+        First drug you are taking: <input class="form-control" type="text" id="dOne">
+        </p>
+        <p style="text-indent: 30px">
+        How many mg in one tablet? <input class="form-control" type="number" id="mgOne">
+        </p>
+        <p style="text-indent: 30px;">
+        Second drug you are taking: <input class="form-control" type="text" id="dTwo">
+        </p>
+        <p style="text-indent: 30px">
+        How many mg in one tablet? <input class="form-control" type="number" id="mgTwo">
+        </p>
+        <p style="text-indent: 30px;">
+            <input type="button" class="btn btn-primary" type="submit" onclick="returnIP()" value="Submit">
+        </p>
+        </div>
+    </form>
+
+<script> 
+function returnIP(){
+
+            //GET RXCUIS ID
+            var x2 = document.getElementById("frm1");
+            var drugOne = document.getElementById("dOne").value;                    
+            var drugTwo = document.getElementById("dTwo").value;
+            var mgOne = document.getElementById("mgOne").value;
+            var mgTwo = document.getElementById("mgTwo").value;
+            var string;
+            
+            var xhrTwo = new XMLHttpRequest();
+
+            // var basicURL = "https://rxnav.nlm.nih.gov/REST/rxcui.json?name=Advil+200+mg+Tab&search=1"
+            var basicURL = "https://rxnav.nlm.nih.gov/REST/rxcui.json?name="
+            var finalURL = basicURL + drugOne + "+" + mgOne+ "+mg+Tab&search=1"
+            
+            xhrTwo.open('GET', finalURL, true);
+            xhrTwo.send();
+            xhrTwo.onreadystatechange = setTimeout(getID, 1000);
+            var idOne;
+
+            function getID() {
+                if (xhrTwo.readyState == 4 && xhrTwo.status == 200) {
+                    var response = xhrTwo.response;
+                    const parsedResponse = JSON.parse(response);
+
+                    // document.getElementById("Result").innerHTML = (parsedResponse);
+                    idOne = (JSON.stringify(parsedResponse.idGroup.rxnormId));
+                    // alert(idOne.substring(2, 8));
+                }
+                else{
+                    document.getElementById("Result").innerHTML = xhrTwo.status + " " + xhrTwo.readyState;
+                }
+            }
+
+            //ID RECIEVED AND STORED FOR ONE, SECOND ONE BELOW:
+            
+            var xhrThree = new XMLHttpRequest();
+                var finalURLTwo = basicURL + drugTwo + "+" + mgTwo + "+mg+Tab&search=1"
+
+                xhrThree.open('GET', finalURLTwo, true);
+                xhrThree.send();
+                xhrThree.onreadystatechange = setTimeout(getIDTwo, 1100);
+                var idTwo;
+
+                function getIDTwo() {
+                    if (xhrThree.readyState == 4 && xhrThree.status == 200) {
+                        var response = xhrThree.response;
+                        const parsedResponse = JSON.parse(response);
+
+                        // document.getElementById("Result").innerHTML = (parsedResponse);
+                        idTwo = (JSON.stringify(parsedResponse.idGroup.rxnormId));
+                        string = (idTwo.substring(2, 8) + "+" + idOne.substring(2,8));
+
+                        var xhrFinal = new XMLHttpRequest();
+                        var finalReq = "https://rxnav.nlm.nih.gov/REST/interaction/list.json?rxcuis=" + string;
+                        xhrFinal.open('GET', finalReq, true);
+                        xhrFinal.send();
+                        xhrFinal.onreadystatechange = setTimeout(displayPrint, 1000);
+
+                        function displayPrint() {
+                            if (xhrFinal.readyState == 4 && xhrFinal.status == 200) {
+                                var response = xhrFinal.response;
+                                const parsedResponse = JSON.parse(response);
+                            // document.getElementById("Result").innerHTML = response + "Success!";
+                            // document.getElementById("Result").innerHTML = "Success!"
+                                if (JSON.stringify(parsedResponse.fullInteractionTypeGroup[0].fullInteractionType[0].interactionPair[0].severity) == ("\"N/A\"")){
+                                    document.getElementById("Result").innerHTML = "Safe to take together!";
+                                    document.getElementById("NextLine").innerHTML = "Description of Interaction: " + (JSON.stringify(parsedResponse.fullInteractionTypeGroup[0].fullInteractionType[0].interactionPair[0].description));
+                                }
+                                else{
+                                    document.getElementById("Result").innerHTML = "Severity of the interaction is: " + (JSON.stringify(parsedResponse.fullInteractionTypeGroup[0].fullInteractionType[0].interactionPair[0].severity));
+                                    document.getElementById("NextLine").innerHTML = "Description of Interaction: " + (JSON.stringify(parsedResponse.fullInteractionTypeGroup[0].fullInteractionType[0].interactionPair[0].description));
+                                }
+                            }
+                            else{
+                                document.getElementById("Result").innerHTML = xhr.status + " " + xhr.readyState;
+                            }
+                        }
+                        
+                    }
+                    else{
+                        document.getElementById("Result").innerHTML = xhrThree.status + " " + xhrThree.readyState;
+                    }
+
+                }
+    
+
+}
+</script>
+<p id = "Result" style="text-indent: 50px; color:blue; font-weight: bold"></p>
+<p id = "NextLine" style="text-indent: 50px; color:blue; font-weight: bold"></p>
+<a class="btn btn-design" href="medanalyzer.html">Check another interaction</a></div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a></div>
+    <script
+        src="assets/js/jquery.min.js"></script>
+        <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
+        <script src="assets/js/map.js"></script>
+        <script src="assets/js/request.js"></script>
+        <script src="assets/js/theme.js"></script>
+</body>
+
+</html>
