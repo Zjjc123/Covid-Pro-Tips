@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Page Not Found - COVID Pro-Tips</title>
+    <title>Map - COVID Pro-Tips</title>
     <meta property="og:image" content="assets/img/favicon.png">
     <meta name="twitter:image" content="assets/img/favicon.png">
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
@@ -28,29 +28,44 @@
                     <li class="nav-item" role="presentation"><a class="nav-link" href="calculator.html"><i class="fas fa-calculator"></i><span>Resource Calculator</span></a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="medication.html"><i class="fas fa-briefcase-medical"></i><span>Medication Analyzer</span></a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="map.html"><i class="fas fa-map-marker-alt"></i><span>Map</span></a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="statistics.html"><i class="fas fa-chart-line"></i><span>Statistics</span></a><a class="nav-link" href="medanalyzer.html"><i class="fas fa-briefcase-medical"></i>Medication Analyzer<br>&nbsp; &nbsp; &nbsp;(using API)</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="statistics.html"><i class="fas fa-chart-line"></i><span>Statistics</span></a><a class="nav-link active" href="medanalyzer.html"><i class="fas fa-briefcase-medical"></i>Medication Analyzer<br>&nbsp; &nbsp; &nbsp;(using API)</a></li>
                 </ul>
                 <div class="text-center d-none d-md-inline"></div><a href="medication.html"></a><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
         </nav>
         <div class="d-flex flex-column" id="content-wrapper">
-            <div id="content">
-                <div class="container-fluid">
-                    <div class="text-center mt-5">
-                        <div class="error mx-auto" data-text="404">
-                            <p class="m-0">404</p>
-                        </div>
-                        <p class="text-dark mb-5 lead">Page Not Found</p>
-                        <p class="text-black-50 mb-0">But a solution will be soon...</p><a href="/">← Back to Dashboard</a></div>
-                </div>
-            </div>
-        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a></div>
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
-    <script src="assets/js/map.js"></script>
-    <script src="assets/js/request.js"></script>
-    <script src="assets/js/theme.js"></script>
-    <script src="assets/js/medication.js"></script>
+            <h3 class="text-dark mb-4" style="padding-top: 0px;margin-top: 50px;margin-bottom: 50px;">&nbsp; &nbsp; &nbsp; &nbsp;Medication Analyzer</h3><p style="text-indent: 52px; font-size: 20px;">
+    Please enter the medicine you are taking, to ensure that they are safe to consume together.  </p>
+
+    <form id="frm1" class= "form-inline" action="/action_page.php">
+        <div class = "container-fluid">
+        <p style="text-indent: 30px">
+        First drug you are taking: <input class="form-control" type="text" id="dOne">
+        </p>
+        <p style="text-indent: 30px">
+        How many mg in one tablet? <input class="form-control" type="number" id="mgOne">
+        </p>
+        <p style="text-indent: 30px;">
+        Second drug you are taking: <input class="form-control" type="text" id="dTwo">
+        </p>
+        <p style="text-indent: 30px">
+        How many mg in one tablet? <input class="form-control" type="number" id="mgTwo">
+        </p>
+        <p style="text-indent: 30px;">
+            <input type="button" class="btn btn-primary" type="submit" onclick="returnIP()" value="Submit">
+        </p>
+        </div>
+    </form>
+<p id = "Result" style="text-indent: 50px; color:blue; font-weight: bold"></p>
+<p id = "NextLine" style="text-indent: 50px; color:blue; font-weight: bold"></p>
+<a class="btn btn-design" href="medanalyzer.html">Check another interaction</a></div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a></div>
+    <script
+        src="assets/js/jquery.min.js"></script>
+        <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
+        <script src="assets/js/map.js"></script>
+        <script src="assets/js/request.js"></script>
+        <script src="assets/js/theme.js"></script>
+        <script src="assets/js/medication.js"></script>
 </body>
 
 </html>
