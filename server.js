@@ -28,7 +28,7 @@ app.get('/calculator', (req, res) => {
 });
 
 app.get('/medication', (req, res) => {
-	res.sendFile('medication.html', { root: __dirname + "/public" });
+	res.sendFile('medanalyzer.html', { root: __dirname + "/public" });
 });
 
 app.get('/map', (req, res) => {
