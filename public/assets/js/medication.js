@@ -24,10 +24,8 @@ function returnIP() {
 
     var xhrTwo = new XMLHttpRequest();
     
-    var finalURL = basicURL + drugOne + "+" + mgOne + "+mg+Tab&search=1"
-
-    // var basicURL = "https://rxnav.nlm.nih.gov/REST/rxcui.json?name=Advil+200+mg+Tab&search=1"
-
+    var finalURL = basicURL + drugOne + "+" + mgOne + "+mg+Tab&search=1";
+    
     xhrTwo.open('GET', finalURL, true);
     xhrTwo.send();
     xhrTwo.onreadystatechange = getIDs;
@@ -60,8 +58,7 @@ function getIDTwo(){
     if (this.readyState == 4 && this.status == 200) {
         var response = this.response;
         const parsedResponse = JSON.parse(response);
-
-        // document.getElementById("Result").innerHTML = (parsedResponse);
+        
         idTwo = (JSON.stringify(parsedResponse.idGroup.rxnormId));
         string = (idTwo.substring(2, 8) + "+" + idOne.substring(2, 8));
 
@@ -83,8 +80,7 @@ function displayPrint() {
     if (this.readyState == 4 && this.status == 200) {
         var response = this.response;
         const parsedResponse = JSON.parse(response);
-        // document.getElementById("Result").innerHTML = response + "Success!";
-        // document.getElementById("Result").innerHTML = "Success!"
+
         if (JSON.stringify(parsedResponse.fullInteractionTypeGroup[0].fullInteractionType[0].interactionPair[0].severity) == ("\"N/A\"")) {
             document.getElementById("Result").innerHTML = "Safe to take together!";
             document.getElementById("NextLine").innerHTML = "Description of Interaction: " + (JSON.stringify(parsedResponse.fullInteractionTypeGroup[0].fullInteractionType[0].interactionPair[0].description));
