@@ -36,12 +36,10 @@ function returnIP() {
 
 
 function getIDs() {
-    console.log(this.response);
     if (this.readyState == 4 && this.status == 200) {
         var response = this.response;
         const parsedResponse = JSON.parse(response);
-
-        document.getElementById("Result").innerHTML = (parsedResponse);
+        
         idOne = (JSON.stringify(parsedResponse.idGroup.rxnormId));
 
         //ID RECIEVED AND STORED FOR ONE, SECOND ONE BELOW:
