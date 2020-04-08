@@ -44,8 +44,6 @@ function getIDs() {
         document.getElementById("Result").innerHTML = (parsedResponse);
         idOne = (JSON.stringify(parsedResponse.idGroup.rxnormId));
 
-        console.log(idOne);
-
         //ID RECIEVED AND STORED FOR ONE, SECOND ONE BELOW:
         var xhrThree = new XMLHttpRequest();
         
@@ -56,7 +54,7 @@ function getIDs() {
         // xhrThree.addEventListener("load", getIDTwo);
     }
     else {
-        document.getElementById("Result").innerHTML = "ID 1 ERROR: Status - " + this.status + " Ready State - " + this.readyState;
+        document.getElementById("Result").innerHTML = "Loading...";
     }
 }
 
@@ -78,7 +76,7 @@ function getIDTwo(){
         // xhrThree.addEventListener("load", displayPrint);
     }
     else {
-        document.getElementById("Result").innerHTML = "ID 2 ERROR: Status - " + this.status + " Ready State - " + this.readyState;
+        document.getElementById("Result").innerHTML = "Loading...";
     }
 
 }
@@ -99,6 +97,6 @@ function displayPrint() {
         }
     }
     else {
-        document.getElementById("Result").innerHTML = "FINAL Error: Status - " + this.status + " Ready State - " + this.readyState;
+        document.getElementById("Result").innerHTML = "Loading...";
     }
 }
