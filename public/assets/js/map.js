@@ -758,9 +758,10 @@ function SetMap(json) {
   /* SET COLOR RANGE */
   var newCases = [];
   for (i = 0; i < json.length; i++) {
-    if (json[i].cases.new == null || json[i].country == "All")
+    // if (json[i].cases.new == null || json[i].country == "All" || json[i].country == "World") {
+    if (json[i].cases.new == null || !(json[i].country in nameCountries)) {
       newCases[i] = 0;
-    else
+    } else
       newCases[i] = json[i].cases.new.substring(1);
   }
 
@@ -780,6 +781,10 @@ function SetMap(json) {
       }
     }
 
+    var light_color = "#00ffe2";
+
+    // old: 090b79
+    var dark_color = "#00aeff";
 
 
     dataSet.push({
@@ -791,16 +796,16 @@ function SetMap(json) {
       "lat": lat[nameCountries[json[i].country]],
       "long": long[nameCountries[json[i].country]],
       normal: {
-        fill: getGradientColor("#00ffe2", "090b79", normalizedNew[i]) + " " + (0.5 * (json[i].cases.total) / (250000) + 0.1),
-        stroke: getGradientColor("#00ffe2", "090b79", normalizedNew[i])
+        fill: getGradientColor(light_color, dark_color, normalizedNew[i]) + " " + (0.5 * (json[i].cases.total) / (json[3].cases.total) + 0.1),
+        stroke: getGradientColor(light_color, dark_color, normalizedNew[i])
       },
       hovered: {
-        fill: getGradientColor("#00ffe2", "090b79", normalizedNew[i]) +" 0.05",
-        stroke: "2 " + getGradientColor("#00ffe2", "090b79", normalizedNew[i])
+        fill: getGradientColor(light_color, dark_color, normalizedNew[i]) + " 0.05",
+        stroke: "2 " + getGradientColor(light_color, dark_color, normalizedNew[i])
       },
       selected: {
-        fill: getGradientColor("#00ffe2", "090b79", normalizedNew[i]) + " 0.6",
-        stroke: "4 " + getGradientColor("#00ffe2", "090b79", normalizedNew[i])
+        fill: getGradientColor(light_color, dark_color, normalizedNew[i]) + " 0.6",
+        stroke: "4 " + getGradientColor(light_color, dark_color, normalizedNew[i])
       }
     });
   }
@@ -821,7 +826,7 @@ function SetMap(json) {
 
   // disable selection
   series.selectionMode(false);
-  
+
   series.tooltip().format(function(e) {
     return "Cases: " + e.getData("size") + " (" + e.getData("new") + ")\n" +
       "Deaths: " + e.getData("deaths") + " (" + e.getData("newdeaths") + ")"
@@ -833,9 +838,9 @@ function SetMap(json) {
   map.interactivity().keyboardZoomAndMove(true);
   // Disables zoom on double click
   map.interactivity().zoomOnDoubleClick(false);
-    
+
   map.background().fill("#d6d6d6");
-    
+
   var cr = map.colorRange(false);
 
   var zoomController = anychart.ui.zoom();
@@ -853,9 +858,9 @@ function SetMap(json) {
 
   function checkScrollDirection(evt) {
     if (checkScrollDirectionIsUp(evt)) {
-      map.zoom(1.5, evt.clientX, evt.clientY)
+      map.zoom(1.5, evt.clientX- $('#map-container').offset().left, evt.clientY)
     } else {
-      map.zoom(0.5, evt.clientX, evt.clientY)
+      map.zoom(0.5, evt.clientX- $('#map-container').offset().left, evt.clientY)
     }
   }
 
@@ -880,49 +885,47 @@ getGradientColor = function(start_color, end_color, percent) {
   end_color = end_color.replace(/^\s*#|\s*$/g, '');
 
   // convert 3 char codes --> 6, e.g. `E0F` --> `EE00FF`
-  if(start_color.length == 3){
+  if (start_color.length == 3) {
     start_color = start_color.replace(/(.)/g, '$1$1');
   }
 
-  if(end_color.length == 3){
+  if (end_color.length == 3) {
     end_color = end_color.replace(/(.)/g, '$1$1');
   }
 
   // get colors
   var start_red = parseInt(start_color.substr(0, 2), 16),
-      start_green = parseInt(start_color.substr(2, 2), 16),
-      start_blue = parseInt(start_color.substr(4, 2), 16);
+    start_green = parseInt(start_color.substr(2, 2), 16),
+    start_blue = parseInt(start_color.substr(4, 2), 16);
 
   var end_red = parseInt(end_color.substr(0, 2), 16),
-      end_green = parseInt(end_color.substr(2, 2), 16),
-      end_blue = parseInt(end_color.substr(4, 2), 16);
+    end_green = parseInt(end_color.substr(2, 2), 16),
+    end_blue = parseInt(end_color.substr(4, 2), 16);
 
   // calculate new color
   var diff_red = end_red - start_red;
   var diff_green = end_green - start_green;
   var diff_blue = end_blue - start_blue;
 
-  diff_red = ( (diff_red * percent) + start_red ).toString(16).split('.')[0];
-  diff_green = ( (diff_green * percent) + start_green ).toString(16).split('.')[0];
-  diff_blue = ( (diff_blue * percent) + start_blue ).toString(16).split('.')[0];
+  diff_red = ((diff_red * percent) + start_red).toString(16).split('.')[0];
+  diff_green = ((diff_green * percent) + start_green).toString(16).split('.')[0];
+  diff_blue = ((diff_blue * percent) + start_blue).toString(16).split('.')[0];
 
   // ensure 2 digits by color
-  if( diff_red.length == 1 ) diff_red = '0' + diff_red
-  if( diff_green.length == 1 ) diff_green = '0' + diff_green
-  if( diff_blue.length == 1 ) diff_blue = '0' + diff_blue
+  if (diff_red.length == 1) diff_red = '0' + diff_red
+  if (diff_green.length == 1) diff_green = '0' + diff_green
+  if (diff_blue.length == 1) diff_blue = '0' + diff_blue
 
   return '#' + diff_red + diff_green + diff_blue;
 };
 
-function normalize(arr)
-{
+function normalize(arr) {
   var max = Math.max.apply(Math, arr);
   var min = Math.min.apply(Math, arr);
   console.log(min + " " + max);
   var ret = [];
 
-  for (var i = 0; i < arr.length; i++)
-  {
+  for (var i = 0; i < arr.length; i++) {
     ret.push((arr[i] - min) / (max - min));
   }
 
