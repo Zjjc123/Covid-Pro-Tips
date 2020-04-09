@@ -783,7 +783,7 @@ function SetMap(json) {
     var light_color = "#00ffe2";
 
     // old: 090b79
-    var dark_color = "#00f2ff";
+    var dark_color = "#00aeff";
 
 
     dataSet.push({
