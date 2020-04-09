@@ -94,3 +94,16 @@ function displayPrint() {
         document.getElementById("Result").innerHTML = "Loading...";
     }
 }
+
+SetDrugOptions(["Test1", "Test2", "Test3"]);
+
+function SetDrugOptions(options)
+{
+    var txt = ""
+    for (i = 0; i < options.length; i++){
+        
+      txt += "<option>" + options[i] + "</option>";
+    }
+    document.getElementById("dOne").innerHTML = txt;
+    document.getElementById("dTwo").innerHTML = txt;
+}
