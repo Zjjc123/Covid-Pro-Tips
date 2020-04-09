@@ -95,7 +95,7 @@ function displayPrint() {
     }
 }
 
-SetDrugOptions(["Test1", "Test2", "Test3"]);
+SetDrugOptions(["Advil", "Zocor", "Bosentan", "Diflucan"]);
 
 function SetDrugOptions(options)
 {
