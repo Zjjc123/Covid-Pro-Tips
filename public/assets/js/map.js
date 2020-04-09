@@ -758,7 +758,8 @@ function SetMap(json) {
   /* SET COLOR RANGE */
   var newCases = [];
   for (i = 0; i < json.length; i++) {
-    if (json[i].cases.new == null || json[i].country == "All" || json[i].country == "World") {
+    // if (json[i].cases.new == null || json[i].country == "All" || json[i].country == "World") {
+    if (json[i].cases.new == null || !(json[i].country in nameCountries)) {
       newCases[i] = 0;
     } else
       newCases[i] = json[i].cases.new.substring(1);
