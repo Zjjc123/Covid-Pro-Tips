@@ -38,16 +38,23 @@ function getIDs() {
         var response = this.response;
         const parsedResponse = JSON.parse(response);
         
-        idOne = (JSON.stringify(parsedResponse.idGroup.rxnormId));
+        if (!JSON.stringify(parsedResponse.idGroup).includes('rxnormId')){
+            document.getElementById("Result").innerHTML = "The tablet size that you have entered does not exist within our database.  Please enter a valid amount.";
+            document.getElementById("NextLine").innerHTML = "";
+        }
+        else {
+// if (JSON.stringify(parsedResponse.idGroup.rxnormId) != -1){
+            idOne = (JSON.stringify(parsedResponse.idGroup.rxnormId));
 
-        //ID RECIEVED AND STORED FOR ONE, SECOND ONE BELOW:
-        var xhrThree = new XMLHttpRequest();
-        
-        var finalURLTwo = basicURL + drugTwo + "+" + mgTwo + "+mg+Tab&search=1"
-        xhrThree.open('GET', finalURLTwo, true);
-        xhrThree.send();
-        xhrThree.onreadystatechange = getIDTwo; 
-        // xhrThree.addEventListener("load", getIDTwo);
+            //ID RECIEVED AND STORED FOR ONE, SECOND ONE BELOW:
+            var xhrThree = new XMLHttpRequest();
+
+            var finalURLTwo = basicURL + drugTwo + "+" + mgTwo + "+mg+Tab&search=1"
+            xhrThree.open('GET', finalURLTwo, true);
+            xhrThree.send();
+            xhrThree.onreadystatechange = getIDTwo; 
+            // xhrThree.addEventListener("load", getIDTwo);
+        }
     }
     else {
         document.getElementById("Result").innerHTML = "Loading...";
@@ -59,16 +66,23 @@ function getIDTwo(){
         var response = this.response;
         const parsedResponse = JSON.parse(response);
         
-        idTwo = (JSON.stringify(parsedResponse.idGroup.rxnormId));
-        string = (idTwo.substring(2, 8) + "+" + idOne.substring(2, 8));
+        if (!JSON.stringify(parsedResponse.idGroup).includes('rxnormId')){
+            document.getElementById("Result").innerHTML = "The tablet size that you have entered does not exist within our database.  Please enter a valid amount.";
+            document.getElementById("NextLine").innerHTML = "";
+        }
+        else {
+// (JSON.stringify(parsedResponse.idGroup.rxnormId) != -1){
+            idTwo = (JSON.stringify(parsedResponse.idGroup.rxnormId));
+            string = (idTwo.substring(2, 8) + "+" + idOne.substring(2, 8));
 
 
-        var xhrFinal = new XMLHttpRequest();
-        var finalReq = "https://rxnav.nlm.nih.gov/REST/interaction/list.json?rxcuis=" + string;
-        xhrFinal.open('GET', finalReq, true);
-        xhrFinal.send();
-        xhrFinal.onreadystatechange = displayPrint;
-        // xhrThree.addEventListener("load", displayPrint);
+            var xhrFinal = new XMLHttpRequest();
+            var finalReq = "https://rxnav.nlm.nih.gov/REST/interaction/list.json?rxcuis=" + string;
+            xhrFinal.open('GET', finalReq, true);
+            xhrFinal.send();
+            xhrFinal.onreadystatechange = displayPrint;
+            // xhrThree.addEventListener("load", displayPrint);
+        }
     }
     else {
         document.getElementById("Result").innerHTML = "Loading...";
@@ -91,6 +105,6 @@ function displayPrint() {
         }
     }
     else {
-        document.getElementById("Result").innerHTML = "Loading...";
+        document.getElementById("Result").innerHTML = "We're sorry, but we don't have the interaction you have requested in our database.  Please take caution when taking more than one drug.";
     }
 }
