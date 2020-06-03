@@ -40,6 +40,7 @@ function getIDs() {
         
         if (!JSON.stringify(parsedResponse.idGroup).includes('rxnormId')){
             document.getElementById("Result").innerHTML = "The tablet size that you have entered does not exist within our database.  Please enter a valid amount.";
+            document.getElementById("NextLine").innerHTML = "";
         }
         else {
 // if (JSON.stringify(parsedResponse.idGroup.rxnormId) != -1){
@@ -57,7 +58,6 @@ function getIDs() {
     }
     else {
         document.getElementById("Result").innerHTML = "Loading...";
-        document.getElementById("NextLine").innerHTML = "";
     }
 }
 
@@ -68,6 +68,7 @@ function getIDTwo(){
         
         if (!JSON.stringify(parsedResponse.idGroup).includes('rxnormId')){
             document.getElementById("Result").innerHTML = "The tablet size that you have entered does not exist within our database.  Please enter a valid amount.";
+            document.getElementById("NextLine").innerHTML = "";
         }
         else {
 // (JSON.stringify(parsedResponse.idGroup.rxnormId) != -1){
@@ -85,7 +86,6 @@ function getIDTwo(){
     }
     else {
         document.getElementById("Result").innerHTML = "Loading...";
-        document.getElementById("NextLine").innerHTML = "";
     }
 
 }
@@ -94,27 +94,17 @@ function displayPrint() {
     if (this.readyState == 4 && this.status == 200) {
         var response = this.response;
         const parsedResponse = JSON.parse(response);
-        var severity = -1;
-        var i;
-        for(i = 0; i<parsedResponse.fullInteractionTypeGroup.length; i++){
-            if(parsedResponse.fullInteractionTypeGroup[i].fullInteractionType[0].interactionPair[0].severity == "high"){
-                severity = i;
-            }
-            else{
-                severity = severity;
-            }
-        }
-        if (severity == -1) {
+
+        if (JSON.stringify(parsedResponse.fullInteractionTypeGroup[0].fullInteractionType[0].interactionPair[0].severity) == ("\"N/A\"")) {
             document.getElementById("Result").innerHTML = "Safe to take together!";
             document.getElementById("NextLine").innerHTML = "Description of Interaction: " + (JSON.stringify(parsedResponse.fullInteractionTypeGroup[0].fullInteractionType[0].interactionPair[0].description));
         }
         else {
-            document.getElementById("Result").innerHTML = "Severity of the interaction is: " + (JSON.stringify(parsedResponse.fullInteractionTypeGroup[severity].fullInteractionType[0].interactionPair[0].severity));
+            document.getElementById("Result").innerHTML = "Severity of the interaction is: " + (JSON.stringify(parsedResponse.fullInteractionTypeGroup[0].fullInteractionType[0].interactionPair[0].severity));
             document.getElementById("NextLine").innerHTML = "Description of Interaction: " + (JSON.stringify(parsedResponse.fullInteractionTypeGroup[0].fullInteractionType[0].interactionPair[0].description));
         }
     }
     else {
         document.getElementById("Result").innerHTML = "We're sorry, but we don't have the interaction you have requested in our database.  Please take caution when taking more than one drug.";
-        document.getElementById("NextLine").innerHTML = "";
     }
 }
